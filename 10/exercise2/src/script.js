@@ -20,13 +20,16 @@ const scene = new THREE.Scene()
  * Model
  */
 const gltfLoader = new GLTFLoader();
+let model = null;
 
-// gltfLoader.load(
-//     '/models/Duck/glTF-Binary/Duck.glb',
-//     (gltf) => {
-//         scene.add(gltf.scene)
-//     }
-// )
+gltfLoader.load(
+    '/models/Duck/glTF-Binary/Duck.glb',
+    (gltf) => {
+        model = gltf.scene
+        gltf.scene.position.y = -1.2
+        scene.add(gltf.scene)
+    }
+)
 
 /**
  * Objects
@@ -105,11 +108,12 @@ window.addEventListener('click', () => {
  * Lights
  */
 // Ambient Light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
 scene.add(ambientLight)
 
 // Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
+directionalLight.position.set(1,2,3)
 scene.add(directionalLight)
 
 /**
@@ -180,6 +184,17 @@ const tick = () =>
         //     console.log('mouse leave')
         // }
         currentIntersect = null
+    }
+
+    // Test intersect with model
+    if(model) {
+        const modelIntersects = raycaster.intersectObject(model);
+
+        if(modelIntersects.length) {
+            model.scale.set(1.2,1.2,1.2)
+        } else {
+            model.scale.set(1,1,1)
+        }
     }
 
     // Update controls
