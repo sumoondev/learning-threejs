@@ -1,0 +1,23 @@
+{
+  "name": "16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "vite": "^8.0.16"
+  },
+  "dependencies": {
+    "lil-gui": "^0.21.0",
+    "three": "^0.184.0",
+    "vite-plugin-glsl": "^1.6.0"
+  }
+}
